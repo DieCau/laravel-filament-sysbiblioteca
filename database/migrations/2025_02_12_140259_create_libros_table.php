@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('autor');
             $table->string('editorial')->nullable();
-            $table->string('cantidad');
+            $table->integer('cantidad');
 
             $table->timestamps();
         });

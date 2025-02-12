@@ -15,50 +15,80 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class LibroResource extends Resource
 {
-    protected static ?string $model = Libro::class;
+  protected static ?string $model = Libro::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+  protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-            ]);
-    }
+  public static function form(Form $form): Form
+  {
+      return $form
+          ->schema([
+              Forms\Components\TextInput::make('titulo')
+                  ->required()
+                  ->maxLength(255),
+              Forms\Components\TextInput::make('autor')
+                  ->required()
+                  ->maxLength(255),
+              Forms\Components\TextInput::make('editorial')
+                  ->maxLength(255),
+              Forms\Components\TextInput::make('cantidad')
+                  ->required()
+                  ->numeric(),
+          ]);
+  }
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+  public static function table(Table $table): Table
+  {
+      return $table
+          ->columns([
+              Tables\Columns\TextColumn::make('index')
+                  ->label('Nro.') 
+                  ->sortable()
+                  ->rowIndex()
+                  ->searchable(),
+              Tables\Columns\TextColumn::make('titulo')
+                  ->searchable(),
+              Tables\Columns\TextColumn::make('autor')
+                  ->searchable(),
+              Tables\Columns\TextColumn::make('editorial')
+                  ->searchable(),
+              Tables\Columns\TextColumn::make('cantidad')
+                  ->searchable(),
+              Tables\Columns\TextColumn::make('created_at')
+                  ->dateTime()
+                  ->sortable()
+                  ->toggleable(isToggledHiddenByDefault: true),
+              Tables\Columns\TextColumn::make('updated_at')
+                  ->dateTime()
+                  ->sortable()
+                  ->toggleable(isToggledHiddenByDefault: true),
+          ])
+          ->filters([
+              //
+          ])
+          ->actions([
+              Tables\Actions\EditAction::make(),
+          ])
+          ->bulkActions([
+              Tables\Actions\BulkActionGroup::make([
+                  Tables\Actions\DeleteBulkAction::make(),
+              ]),
+          ]);
+  }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
+  public static function getRelations(): array
+  {
+      return [
+          //
+      ];
+  }
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListLibros::route('/'),
-            'create' => Pages\CreateLibro::route('/create'),
-            'edit' => Pages\EditLibro::route('/{record}/edit'),
-        ];
-    }
+  public static function getPages(): array
+  {
+      return [
+          'index' => Pages\ListLibros::route('/'),
+          'create' => Pages\CreateLibro::route('/create'),
+          'edit' => Pages\EditLibro::route('/{record}/edit'),
+      ];
+  }
 }
