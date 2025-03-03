@@ -29,11 +29,11 @@ class EditLibro extends EditRecord
         return null;
     } 
 
-    protected function afterCreate()
+    protected function afterSave()
     {
         Notification::make()
-        ->title('Libro creado exitosamente.')
-        ->body('El libro ha sido creado exitosamente.')
+        ->title('Libro actualizado exitosamente.')
+        ->body('El libro ha sido actualizado exitosamente.')
         ->success()
         ->send();   
     }   
