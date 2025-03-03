@@ -40,9 +40,10 @@ class LibroResource extends Resource
   public static function table(Table $table): Table
   {
       return $table
+     //   Añadir columnas
           ->columns([
               Tables\Columns\TextColumn::make('index')
-                  ->label('Nro.') 
+                  ->label('Nro') 
                   ->sortable()
                   ->rowIndex()
                   ->searchable(),
