@@ -1,3 +1,4 @@
+<!-- Editar un libro -->
 <?php
 
 namespace App\Filament\Resources\LibroResource\Pages;
