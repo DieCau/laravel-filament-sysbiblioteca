@@ -1,3 +1,4 @@
+<!-- Listado de Libros -->
 <?php
 
 namespace App\Filament\Resources\LibroResource\Pages;
